@@ -1,0 +1,57 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/SOCD_RealLifeApplication.csproj": {}
+  },
+  "projects": {
+    "/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/SOCD_RealLifeApplication.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/SOCD_RealLifeApplication.csproj",
+        "projectName": "SOCD_RealLifeApplication",
+        "projectPath": "/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/SOCD_RealLifeApplication.csproj",
+        "packagesPath": "/Users/vinayshukla/.nuget/packages/",
+        "outputPath": "/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/vinayshukla/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

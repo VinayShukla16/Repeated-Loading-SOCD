@@ -1,0 +1,11 @@
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/obj/Debug/netcoreapp2.1/SOCD_RealLifeApplication.csproj.CoreCompileInputs.cache
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/obj/Debug/netcoreapp2.1/SOCD_RealLifeApplication.AssemblyInfoInputs.cache
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/obj/Debug/netcoreapp2.1/SOCD_RealLifeApplication.AssemblyInfo.cs
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/obj/Debug/netcoreapp2.1/SOCD_RealLifeApplication.csprojAssemblyReference.cache
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/bin/Debug/netcoreapp2.1/SOCD_RealLifeApplication.deps.json
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/bin/Debug/netcoreapp2.1/SOCD_RealLifeApplication.runtimeconfig.json
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/bin/Debug/netcoreapp2.1/SOCD_RealLifeApplication.runtimeconfig.dev.json
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/bin/Debug/netcoreapp2.1/SOCD_RealLifeApplication.dll
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/bin/Debug/netcoreapp2.1/SOCD_RealLifeApplication.pdb
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/obj/Debug/netcoreapp2.1/SOCD_RealLifeApplication.dll
+/Users/vinayshukla/Projects/SOCD_RealLifeApplication/SOCD_RealLifeApplication/obj/Debug/netcoreapp2.1/SOCD_RealLifeApplication.pdb
