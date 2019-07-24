@@ -35,13 +35,16 @@ namespace SOCD_RealLifeApplication
                      *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
                      * the convoy to go for a bit before taking data so i put it to 200 loops around the track.
                      */
-                    if(counter == 200)
+                    if(counter == 1000)
                     {
                         var array = textFileWriter.compileData();
                         textFileWriter.textWriter(array);
                     }
                     counter++;
-
+                    foreach(Vehicle vehicle in Program.convoy) {
+                        Console.WriteLine(vehicle.Id + ": " + vehicle.tripDuration);
+                    }
+                    Thread.Sleep(1000);
                     /*
                      *If there aren't any vehicles in the currentEntryPoint, 0, then we aren't going to bother with the whole adding process. However, if there are,
                      * we want to loop through all of the vehicles at that entry point and generate a random number to determine if we are going to add each of the
@@ -73,6 +76,7 @@ namespace SOCD_RealLifeApplication
                                 {
                                     //Just add a vehicle to the convoy, specifically at the index of the entry point
                                     Program.convoy.Add(Program.circleTrack[0][vehicleNumber]);
+                                    Console.WriteLine(Program.convoy.Count);
                                 }
                                 Program.circleTrack[0].RemoveAt(vehicleNumber);
                                 SelectLeader.resetLeader();

@@ -14,7 +14,7 @@ namespace SOCD_RealLifeApplication
         public static string[] compileData()
         {
             string[] arrayData = new string[102];
-            arrayData[0] = "Categories, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10";
+            arrayData[0] = "Categories, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25";
             for(int i = 0; i < Program.convoy.Count; i++)
             {
                 arrayData[i + 1] = "Series " + (i + 1);
@@ -26,7 +26,7 @@ namespace SOCD_RealLifeApplication
             return arrayData;
         }
         /*
-         *Writes to a text file from the array that was compiled.
+         *Writes to a text file from the array that was compiled. 
          */
         public static void textWriter(string[] dataArray)
         {

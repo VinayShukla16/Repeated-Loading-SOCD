@@ -32,15 +32,19 @@ namespace SOCD_RealLifeApplication
             leavingVehicle.leaderTime = 0;
             calculateRatio(leavingVehicle);
         }
-         
+        /*
+         *This takes the expected and actual work done and builds a ratio of acutal over expected
+         */
        public static void calculateRatio(Vehicle leavingVehicle)
         {
             leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].calculatedRatio =
-            leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].actualWorkDone /
-            leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].expectedWork;
-
+            (leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].actualWorkDone /
+            leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].expectedWork);
         }
-
+        /*
+         *This creates a text array that consists of a list of averaged ratios for each vehicle during each
+         *respective convoy.
+         */
         public static double[] createTextArrayForTextFile(List<VehicleExpectedAndActualData> ratioList)
         {
             double[] returnedArrayOfAveragedRatios = new double[ratioList.Count];
@@ -48,7 +52,7 @@ namespace SOCD_RealLifeApplication
             for (int i = 0; i < ratioList.Count; i++)
             {
                 var total = 0.0;
-                for(int index = 0; index < i; index++)
+                for(int index = 0; index <= i; index++)
                 {
                     total += ratioList[index].calculatedRatio;
                 }

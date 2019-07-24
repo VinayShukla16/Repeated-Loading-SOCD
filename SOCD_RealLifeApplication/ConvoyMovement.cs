@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ *This class is in charge of controlling convoy movement and updating position
+ */
+using System;
 using System.Collections.Generic;
 using SOCD_Algorith_System;
 

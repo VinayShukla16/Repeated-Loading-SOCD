@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ *Main program to help direct the flow. It creates the random list and then starts the game.
+ */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,12 +26,18 @@ namespace SOCD_Algorith_System
         public static Vehicle[] vehicleList = new Vehicle[100];
         public static List<Vehicle>[] circleTrack = new List<Vehicle>[150000];
 
+        /*
+         *Main function that calls create list and then starts game.
+         */
         static void Main(string[] args)
         {
             createRandomList();
             startGame();
         }
 
+        /*
+         *This creates the random list of vehicles.
+         */
         private static void createRandomList()
         {
             RandomList.createRandomList();
