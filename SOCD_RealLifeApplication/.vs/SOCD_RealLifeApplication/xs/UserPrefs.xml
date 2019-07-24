@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{5B970E9B-C540-4D66-A903-2F654C1EBE39}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="textFileWriter.cs">
+    <Files>
+      <File FileName="textFileWriter.cs" Line="13" Column="12" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SOCD_RealLifeApplication" expanded="True">
+            <Node name="SOCD_RealLifeApplication" expanded="True">
+              <Node name="textFileWriter.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.SOCD__RealLifeApplication PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

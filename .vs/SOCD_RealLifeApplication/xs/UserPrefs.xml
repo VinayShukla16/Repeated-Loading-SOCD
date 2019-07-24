@@ -1,0 +1,35 @@
+﻿<Properties StartupConfiguration="{51E5D12B-9C30-46BC-BE47-A13F7B897CED}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SOCD_RealLifeApplication/Calculations.cs">
+    <Files>
+      <File FileName="SOCD_RealLifeApplication/Program.cs" Line="18" Column="6" />
+      <File FileName="SOCD_RealLifeApplication/RepeatedLoading.cs" Line="136" Column="22" />
+      <File FileName="SOCD_RealLifeApplication/textFileWrter.cs" Line="8" Column="2" />
+      <File FileName="SOCD_RealLifeApplication/ConvoyMovement.cs" Line="24" Column="18" />
+      <File FileName="SOCD_RealLifeApplication/SelectLeader.cs" Line="35" Column="54" />
+      <File FileName="SOCD_RealLifeApplication/RandomList.cs" Line="36" Column="93" />
+      <File FileName="SOCD_RealLifeApplication/Vehicle.cs" Line="2" Column="68" />
+      <File FileName="SOCD_RealLifeApplication/Calculations.cs" Line="35" Column="10" />
+      <File FileName="SOCD_RealLifeApplication/NormalDistribution.cs" Line="9" Column="35" />
+      <File FileName="SOCD_RealLifeApplication/TripDuration.cs" Line="29" Column="48" />
+      <File FileName="SOCD_RealLifeApplication/VehicleExpectedAndActualData.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="SOCD_RealLifeApplication" expanded="True">
+            <Node name="SOCD_RealLifeApplication" expanded="True">
+              <Node name="Calculations.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.SOCD__RealLifeApplication PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

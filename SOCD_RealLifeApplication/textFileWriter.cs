@@ -8,7 +8,9 @@ namespace SOCD_RealLifeApplication
 {
     public class textFileWriter
     {
-        
+        /*
+         *Compiles the data for the specified vehicles and creates an array from it.
+         */
         public static string[] compileData()
         {
             string[] arrayData = new string[102];
@@ -23,6 +25,9 @@ namespace SOCD_RealLifeApplication
             }
             return arrayData;
         }
+        /*
+         *Writes to a text file from the array that was compiled.
+         */
         public static void textWriter(string[] dataArray)
         {
             //Pass the filepath and filename to the StreamWriter Constructor
