@@ -34,10 +34,13 @@ namespace SOCD_RealLifeApplication
                 placeVehicleBackInCircleTrack(vehicle);
                 //Catch up
                 ConvoyMovement.moveConvoyPositionAfterConvoyRemoved(Program.convoy.IndexOf(vehicle));
-                Calculations.updateProportionalExepectedDistance();
-                Calculations.setActualTime(vehicle);
-                //Add new slot in our list because current convoy for vehicle is finished
-                vehicle.vehicleCalculationData.Add(new VehicleExpectedAndActualData());
+                if (Program.convoy.Count > 1)
+                {
+                    Calculations.updateProportionalExepectedDistance();
+                    Calculations.setActualTime(vehicle);
+                    //Add new slot in our list because current convoy for vehicle is finished
+                    vehicle.vehicleCalculationData.Add(new VehicleExpectedAndActualData());
+                }
                 Program.convoy.Remove(vehicle);
             }
         }

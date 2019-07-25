@@ -1,5 +1,5 @@
 ﻿/*
- *This class is in charge of controlling convoy movement and updating position
+ *Controls the movement of the convoy.
  */
 using System;
 using System.Collections.Generic;
@@ -15,16 +15,13 @@ namespace SOCD_RealLifeApplication
          */
         public static void updateTime()
         {
-            if (Program.convoy.Count > 1)
+            foreach (Vehicle vehicle in Program.convoy)
             {
-                foreach (Vehicle vehicle in Program.convoy)
+                if (vehicle.leader == true)
                 {
-                    if (vehicle.leader == true)
-                    {
-                        vehicle.leaderTime += 0.00284;
-                    }
-                    vehicle.totalDistanceTraveled += 0.00284;
+                    vehicle.leaderTime += 0.00284;
                 }
+                vehicle.totalDistanceTraveled += 0.00284;
             }
         }
         /*

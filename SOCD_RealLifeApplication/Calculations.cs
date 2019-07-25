@@ -15,11 +15,11 @@ namespace SOCD_RealLifeApplication
          */
         public static void updateProportionalExepectedDistance()
         {
-            foreach (Vehicle vehicle in Program.convoy)
-            {
-                vehicle.vehicleCalculationData[vehicle.vehicleCalculationData.Count - 1].expectedWork += (vehicle.totalDistanceTraveled / (Program.convoy.Count));
-                vehicle.totalDistanceTraveled = 0;
-            }
+                foreach (Vehicle vehicle in Program.convoy)
+                {
+                    vehicle.vehicleCalculationData[vehicle.vehicleCalculationData.Count - 1].expectedWork += (vehicle.totalDistanceTraveled / (Program.convoy.Count));
+                    vehicle.totalDistanceTraveled = 0;
+                }
         }
         /*
          *This takes the actual leader time for when a respective vehicle leaves the convoy. Then the ratio is calculated and stored into
@@ -48,7 +48,6 @@ namespace SOCD_RealLifeApplication
         public static double[] createTextArrayForTextFile(List<VehicleExpectedAndActualData> ratioList)
         {
             double[] returnedArrayOfAveragedRatios = new double[ratioList.Count];
-            Console.WriteLine("Creating text array");
             for (int i = 0; i < ratioList.Count; i++)
             {
                 var total = 0.0;
