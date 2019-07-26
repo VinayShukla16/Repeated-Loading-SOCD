@@ -36,7 +36,7 @@ namespace SOCD_RealLifeApplication
                      * the convoy to go for a bit before taking data so i put it to 200 loops around the track.
                      */
                      
-                    if(counter == 2000)
+                    /*if(counter == 2000)
                     {
                         foreach(Vehicle vehicle in Program.convoy)
                         {
@@ -45,7 +45,6 @@ namespace SOCD_RealLifeApplication
                                 Console.Write(element.calculatedRatio +  ", ");
                                 if(double.IsNaN(element.calculatedRatio))
                                 {
-                                    Console.WriteLine("Hi");
                                     Console.Write(element.actualWorkDone + " + " + element.expectedWork);
                                 }
                             }
@@ -55,8 +54,8 @@ namespace SOCD_RealLifeApplication
                         textFileWriter.textWriter(array);
                     }
                     counter++;
-                    Console.WriteLine(counter);
-                    /*foreach(Vehicle vehicle  in Program.convoy)
+                    Console.WriteLine(counter);*/
+                    foreach(Vehicle vehicle  in Program.convoy)
                     {
                         foreach(VehicleExpectedAndActualData data in vehicle.vehicleCalculationData)
                         {
@@ -69,7 +68,7 @@ namespace SOCD_RealLifeApplication
                                 Console.WriteLine("");
                             }
                         }
-                    }*/
+                    }
                     /*
                      *If there aren't any vehicles in the currentEntryPoint, 0, then we aren't going to bother with the whole adding process. However, if there are,
                      * we want to loop through all of the vehicles at that entry point and generate a random number to determine if we are going to add each of the

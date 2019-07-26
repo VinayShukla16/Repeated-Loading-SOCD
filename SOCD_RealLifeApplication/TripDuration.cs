@@ -37,12 +37,13 @@ namespace SOCD_RealLifeApplication
                 if (Program.convoy.Count > 1)
                 {
                     Calculations.updateProportionalExepectedDistance();
+                }
                     Calculations.setActualTime(vehicle);
                     //Add new slot in our list because current convoy for vehicle is finished
                     vehicle.vehicleCalculationData.Add(new VehicleExpectedAndActualData());
-                }
                 Program.convoy.Remove(vehicle);
             }
+            
         }
         /*
          *This is just a simple method used to place a vehicle back into the circle track and randomize its trip duration.
