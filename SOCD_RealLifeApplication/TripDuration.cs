@@ -27,22 +27,18 @@ namespace SOCD_RealLifeApplication
         { 
             if (vehicle.tripDuration == 0)
             {
-                if (Program.convoy.IndexOf(vehicle) == (Program.convoy.Count - 1))
-                {
-                    SelectLeader.resetLeader();
-                }
                 placeVehicleBackInCircleTrack(vehicle);
                 //Catch up
-                ConvoyMovement.moveConvoyPositionAfterConvoyRemoved(Program.convoy.IndexOf(vehicle));
-                if (Program.convoy.Count > 1)
-                {
-                    Calculations.updateProportionalExepectedDistance();
-                }
-                    Calculations.setActualTime(vehicle);
-                    //Add new slot in our list because current convoy for vehicle is finished
-                    vehicle.vehicleCalculationData.Add(new VehicleExpectedAndActualData());
+                int index = Program.convoy.IndexOf(vehicle);
+                vehicle.leader = false;
                 Program.convoy.Remove(vehicle);
-            }
+                SelectLeader.resetLeader();
+                ConvoyMovement.moveConvoyPositionAfterConvoyRemoved(index);
+                Calculations.updateExpectedandActual();
+                Calculations.calculateRatio(vehicle);
+                vehicle.numberOfConvoysParticipated++;
+
+            } 
             
         }
         /*

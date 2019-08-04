@@ -23,29 +23,54 @@ namespace SOCD_RealLifeApplication
         }
         /*
          *This takes the actual leader time for when a respective vehicle leaves the convoy. Then the ratio is calculated and stored into
-         * an array along with the total expected and total actual work done
+         *an array along with the total expected and total actual work done
          */
-        public static void setActualTime(Vehicle leavingVehicle)
+        public static void setActualTime()
         {
-            leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].actualWorkDone = leavingVehicle.leaderTime;
-            leavingVehicle.numberOfConvoysParticipated++;
-            leavingVehicle.leaderTime = 0;
-            calculateRatio(leavingVehicle);
+            foreach (Vehicle vehicle in Program.convoy)
+            {
+                vehicle.vehicleCalculationData[vehicle.vehicleCalculationData.Count - 1].actualWorkDone = vehicle.leaderTime;
+                vehicle.leaderTime = 0;
+            }
         }
         /*
-         *This takes the expected and actual work done and builds a ratio of acutal over expected
+         *This takes the expected and actual work done and builds a ratio of acutal over expected.
          */
        public static void calculateRatio(Vehicle leavingVehicle)
         {
-            leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].calculatedRatio =
-            (leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].actualWorkDone /
-            leavingVehicle.vehicleCalculationData[leavingVehicle.vehicleCalculationData.Count - 1].expectedWork);
+            var totalExpected = 0.0;
+            var totalActual = 0.0;
+            foreach (VehicleExpectedAndActualData dataValue in leavingVehicle.vehicleCalculationData) {
+                if(leavingVehicle.numberOfConvoysParticipated == dataValue.convoyNumber)
+                {
+                    totalExpected += dataValue.expectedWork;
+                    totalActual += dataValue.actualWorkDone;
+                }
+            }
+            leavingVehicle.vehicleCalculatedRatios[leavingVehicle.numberOfConvoysParticipated].calculatedRatio =
+            (totalActual / totalExpected);
+            leavingVehicle.vehicleCalculatedRatios.Add(new VehicleCalculatedRatios());
         }
         /*
          *This creates a text array that consists of a list of averaged ratios for each vehicle during each
          *respective convoy.
          */
-        public static double[] createTextArrayForTextFile(List<VehicleExpectedAndActualData> ratioList)
+         public static void updateExpectedandActual()
+        {
+            if (Program.convoy.Count > 1)
+            {
+                updateProportionalExepectedDistance();
+                setActualTime();
+                //Add new slot in our list because current convoy for vehicle is finished
+                
+                foreach (Vehicle vehicles in Program.convoy)
+                {
+                    vehicles.vehicleCalculationData[vehicles.vehicleCalculationData.Count - 1].convoyNumber = vehicles.numberOfConvoysParticipated;
+                    vehicles.vehicleCalculationData.Add(new VehicleExpectedAndActualData());
+                }
+            }
+        }
+        public static double[] createTextArrayForTextFile(List<VehicleCalculatedRatios> ratioList)
         {
             double[] returnedArrayOfAveragedRatios = new double[ratioList.Count];
             for (int i = 0; i < ratioList.Count; i++)
@@ -55,7 +80,7 @@ namespace SOCD_RealLifeApplication
                 {
                     total += ratioList[index].calculatedRatio;
                 }
-                var average = total / (i + 1);
+                var average = (total / (i + 1));
                 returnedArrayOfAveragedRatios[i] = average;
             }
 

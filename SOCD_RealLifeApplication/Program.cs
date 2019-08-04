@@ -20,7 +20,6 @@ namespace SOCD_Algorith_System
     class Program
     {
         public static int numConvoy = 100;
-        public static int convoysInPositions = 2;
         public static int numAvailablePosition = 150000;
         public static List<Vehicle> convoy = new List<Vehicle>(100);
         public static Vehicle[] vehicleList = new Vehicle[100];

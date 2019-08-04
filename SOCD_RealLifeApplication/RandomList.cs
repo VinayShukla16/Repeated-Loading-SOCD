@@ -24,12 +24,13 @@ namespace SOCD_RealLifeApplication
                     position = (randomPosition),
                     tripDuration = rand.Next(1, 1000),
                     leader = false,
-                    numberOfTimesCalled = 0,
-                    totalVehiclesDuringLeader = 0,
-                    leaderTime = 0, 
-                    vehicleCalculationData = new List<VehicleExpectedAndActualData>()
+                    leaderTime = 0,
+                    numberOfConvoysParticipated = 0,
+                    vehicleCalculationData = new List<VehicleExpectedAndActualData>(),
+                    vehicleCalculatedRatios = new List<VehicleCalculatedRatios>()
                 };
                 Program.vehicleList[i].vehicleCalculationData.Add((new VehicleExpectedAndActualData()));
+                Program.vehicleList[i].vehicleCalculatedRatios.Add(new VehicleCalculatedRatios());
             }
         }
         /*

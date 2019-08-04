@@ -21,54 +21,57 @@ namespace SOCD_RealLifeApplication
              *We start at the starting position, which is the position of the first vehicle and is also our first entry point. Thus,
              * currentEntryPoint is set to our starting Position.
              */
-            for (int i = startingPosition; i < Program.numAvailablePosition; i++)
+            for (int i = startingPosition; i <= Program.numAvailablePosition; i++)
             {
                 /*
                  *First case is if we are at index 149999, at that point, we set i to 0 and then we name our currentEntryPoint as 0 because
                  * that is our currentEntryPoint.
                  */
-                if ((i == Program.numAvailablePosition - 1))
+                 if(i == Program.numAvailablePosition)
                 {
                     i = 0;
+                }
+
+                if ((i == Program.numAvailablePosition - 1))
+                {
                     currentEntryPoint = 0;
+
+                    /*foreach(Vehicle vehicle in Program.convoy)
+                    {
+                        if (vehicle.leader == true)
+                        {
+                            Console.WriteLine(vehicle.Id + ": " + "leader");
+                        }
+                        else
+                        {
+                            Console.WriteLine(vehicle.Id + ": " + "notleader");
+                        }
+                    }
+                    Thread.Sleep(500);
+                    Console.WriteLine("");*/
                     /*
                      *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
                      * the convoy to go for a bit before taking data so i put it to 200 loops around the track.
                      */
-                     
-                    /*if(counter == 2000)
+                    if(counter == 2000)
                     {
-                        foreach(Vehicle vehicle in Program.convoy)
+                        foreach(Vehicle vehicle in Program.vehicleList)
                         {
-                            foreach(var element in vehicle.vehicleCalculationData)
+                            if (!Program.convoy.Contains(vehicle))
                             {
-                                Console.Write(element.calculatedRatio +  ", ");
-                                if(double.IsNaN(element.calculatedRatio))
+                                foreach (var element in vehicle.vehicleCalculationData)
                                 {
-                                    Console.Write(element.actualWorkDone + " + " + element.expectedWork);
+                                    Console.Write(element.actualWorkDone + "+" + element.expectedWork);
+                                    Console.WriteLine("");
                                 }
+                                Console.WriteLine("");
                             }
-                            Console.WriteLine("");
                         }
                         var array = textFileWriter.compileData();
                         textFileWriter.textWriter(array);
                     }
                     counter++;
-                    Console.WriteLine(counter);*/
-                    foreach(Vehicle vehicle  in Program.convoy)
-                    {
-                        foreach(VehicleExpectedAndActualData data in vehicle.vehicleCalculationData)
-                        {
-                            if (double.IsNaN(data.calculatedRatio))
-                            {
-                                Console.WriteLine(vehicle.Id);
-                                Console.WriteLine(Program.convoy.Count);
-                                Console.WriteLine(data.actualWorkDone);
-                                Console.WriteLine(data.expectedWork);
-                                Console.WriteLine("");
-                            }
-                        }
-                    }
+                    Console.WriteLine(counter);
                     /*
                      *If there aren't any vehicles in the currentEntryPoint, 0, then we aren't going to bother with the whole adding process. However, if there are,
                      * we want to loop through all of the vehicles at that entry point and generate a random number to determine if we are going to add each of the
@@ -85,22 +88,11 @@ namespace SOCD_RealLifeApplication
                             //1/10 chance for us to add the specified vehicle.
                             if (NormalDistribution.probability() == 1)
                             {
-                                Calculations.updateProportionalExepectedDistance();
-                                if (totalAdded > 0)
+                                Calculations.updateExpectedandActual();
+                                Program.convoy.Add(Program.circleTrack[0][vehicleNumber]);
+                                for(int index = 0; index < totalAdded; index++)
                                 {
-                                    /*
-                                     *Move to a position farther if there are more than one vehicles added and update the distance
-                                     *traveled to get to a farther position.
-                                     */
-                                    Program.convoy.Add(Program.circleTrack[0][vehicleNumber]);
-                                    Program.convoy[Program.convoy.Count - 1].position += totalAdded;
-                                    Program.convoy[Program.convoy.Count - 1].totalDistanceTraveled += totalAdded * (0.00248);
-                                }
-                                else
-                                {
-                                    //Just add a vehicle to the convoy, specifically at the index of the entry point
-                                    Program.convoy.Add(Program.circleTrack[0][vehicleNumber]);
-                                    Console.WriteLine(Program.convoy.Count);
+                                    ConvoyMovement.moveSingleConvoy(Program.circleTrack[0][vehicleNumber]);
                                 }
                                 Program.circleTrack[0].RemoveAt(vehicleNumber);
                                 SelectLeader.resetLeader();
@@ -139,16 +131,11 @@ namespace SOCD_RealLifeApplication
                         {
                             if (NormalDistribution.probability() == 1)
                             {
-                                Calculations.updateProportionalExepectedDistance();
-                                if (totalAdded > 0)
+                                Calculations.updateExpectedandActual();
+                                Program.convoy.Add(Program.circleTrack[i + 1][vehicleNumber]);
+                                for (int index = 0; index < totalAdded; index++)
                                 {
-                                    Program.convoy.Add(Program.circleTrack[i + 1][vehicleNumber]);
-                                    Program.convoy[Program.convoy.Count - 1].position += totalAdded;
-                                    Program.convoy[Program.convoy.Count - 1].totalDistanceTraveled += totalAdded * (0.00248);
-                                }
-                                else
-                                {
-                                    Program.convoy.Add(Program.circleTrack[i + 1][vehicleNumber]);
+                                    ConvoyMovement.moveSingleConvoy(Program.circleTrack[i + 1][vehicleNumber]);
                                 }
                                 Program.circleTrack[i + 1].RemoveAt(vehicleNumber);
                                 SelectLeader.resetLeader();
@@ -174,14 +161,14 @@ namespace SOCD_RealLifeApplication
                     moveAndUpdateVehiclePosition(currentEntryPoint);
                 }
                 /*
-                 *This is just when the convoy is in between entry points and just moving and updating leader time and convoy positions.
+                 *This is just when
+                 * the convoy is in between entry points and just moving and updating leader time and convoy positions.
                  */
                 else
                 {
                     ConvoyMovement.moveConvoyPosition();
                     ConvoyMovement.updateTime();
                 }
-                
             }
         }
 

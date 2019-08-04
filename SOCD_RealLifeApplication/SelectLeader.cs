@@ -36,9 +36,12 @@ namespace SOCD_RealLifeApplication
          */
         public static void resetLeader()
         {
-            foreach (Vehicle vehicle in Program.convoy)
+            if (Program.convoy.Count >= 1)
             {
-                vehicle.leader = false;
+                foreach (Vehicle vehicle in Program.convoy)
+                {
+                    vehicle.leader = false;
+                }
                 Program.convoy[Program.convoy.Count - 1].leader = true;
             }
         }

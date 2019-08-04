@@ -9,19 +9,24 @@ namespace SOCD_RealLifeApplication
 {
     public class ConvoyMovement
     {
+        //minutes or miles
+        static double travelForOneSpace = 0.00284;
         /*
          *This method updates the leader time for the leader and increases the total distance traveled, which is equal to the
          *time it takes(in minutes) because we are going 1 mile per minute
          */
         public static void updateTime()
         {
-            foreach (Vehicle vehicle in Program.convoy)
+            if (Program.convoy.Count > 1)
             {
-                if (vehicle.leader == true)
+                foreach (Vehicle vehicle in Program.convoy)
                 {
-                    vehicle.leaderTime += 0.00284;
+                    if (vehicle.leader == true)
+                    {
+                        vehicle.leaderTime += travelForOneSpace;
+                    }
+                    vehicle.totalDistanceTraveled += travelForOneSpace;
                 }
-                vehicle.totalDistanceTraveled += 0.00284;
             }
         }
         /*
@@ -32,11 +37,31 @@ namespace SOCD_RealLifeApplication
         {
             for (int i = 0; i < Program.convoy.Count; i++)
             {
-                if (Program.convoy[i].position == (Program.numAvailablePosition - 1))
+                moveSingleConvoy(Program.convoy[i]);
+            }
+        }
+
+        /*
+         *This is in charge o moving a singular vehicle, updating its poisiton as well as total distance traveled
+         * if applicable.
+         */
+        public static void moveSingleConvoy(Vehicle vehicle)
+        {
+            if (vehicle.position == (Program.numAvailablePosition - 1))
+            {
+                vehicle.position = 0;
+            }
+            else
+            {
+                vehicle.position++;
+            }
+            if (Program.convoy.Count > 1)
+            {
+                if (vehicle.leader == true)
                 {
-                    Program.convoy[i].position = 0;
+                    vehicle.leaderTime += travelForOneSpace;
                 }
-                Program.convoy[i].position++;
+                vehicle.totalDistanceTraveled += travelForOneSpace;
             }
         }
 
@@ -45,15 +70,10 @@ namespace SOCD_RealLifeApplication
          * Leader time and total distance traveled also incremented.
          */
         public static void moveConvoyPositionAfterConvoyRemoved(int indexRemoved)
-        {
-            for(int i = indexRemoved - 1; i >= 0; i--)
+        { 
+            for (int i = indexRemoved - 1; i >= 0; i--)
             {
-                Program.convoy[i].position++;
-                if(Program.convoy[i].leader == true)
-                {
-                    Program.convoy[i].leaderTime += 0.00284;
-                }
-                Program.convoy[i].totalDistanceTraveled += 0.00284;
+                moveSingleConvoy(Program.convoy[i]);
             }
         }
     }

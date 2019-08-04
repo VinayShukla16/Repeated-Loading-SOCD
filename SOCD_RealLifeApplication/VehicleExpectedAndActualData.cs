@@ -9,6 +9,6 @@ namespace SOCD_RealLifeApplication
     {
         public double expectedWork { get; set; }
         public double actualWorkDone { get; set; }
-        public double calculatedRatio { get; set; }
+        public int convoyNumber { get; set; }
     }
 }

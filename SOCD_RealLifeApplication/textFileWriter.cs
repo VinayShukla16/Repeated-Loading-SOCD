@@ -15,14 +15,15 @@ namespace SOCD_RealLifeApplication
         {
             string[] arrayData = new string[102];
             arrayData[0] = "Categories, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25";
-            for(int i = 0; i < Program.convoy.Count; i++)
+            for(int i = 0; i < Program.vehicleList.Length; i++)
             {
                 arrayData[i + 1] = "Series " + (i + 1);
-                var arrayOfVehicleRatioMeans = Calculations.createTextArrayForTextFile(Program.convoy[i].vehicleCalculationData);
+                var arrayOfVehicleRatioMeans = Calculations.createTextArrayForTextFile(Program.vehicleList[i].vehicleCalculatedRatios);
                 foreach (var ratio in arrayOfVehicleRatioMeans) {
                     arrayData[i + 1] += ", " + ratio;
                 }
             }
+
             return arrayData;
         }
         /*

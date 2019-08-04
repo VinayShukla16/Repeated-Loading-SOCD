@@ -13,10 +13,9 @@ namespace SOCD_RealLifeApplication
         public int tripDuration { get; set; }
         public bool leader { get; set; }
         public double leaderTime { get; set; }
-        public int totalVehiclesDuringLeader { get; set; }
         public int numberOfConvoysParticipated { get; set; }
         public double totalDistanceTraveled { get; set; }
         public List<VehicleExpectedAndActualData> vehicleCalculationData { get; set; }
-        public int numberOfTimesCalled { get; set; }
+        public List<VehicleCalculatedRatios> vehicleCalculatedRatios { get; set; }
     }
 }
