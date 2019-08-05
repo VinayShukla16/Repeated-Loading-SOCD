@@ -29,8 +29,6 @@ namespace SOCD_RealLifeApplication
                     vehicleCalculationData = new List<VehicleExpectedAndActualData>(),
                     vehicleCalculatedRatios = new List<VehicleCalculatedRatios>()
                 };
-                Program.vehicleList[i].vehicleCalculationData.Add((new VehicleExpectedAndActualData()));
-                Program.vehicleList[i].vehicleCalculatedRatios.Add(new VehicleCalculatedRatios());
             }
         }
         /*

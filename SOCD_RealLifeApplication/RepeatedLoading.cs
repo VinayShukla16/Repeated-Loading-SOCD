@@ -48,7 +48,7 @@ namespace SOCD_RealLifeApplication
                         }
                     }
                     Thread.Sleep(500);
-                    Console.WriteLine("");*/
+                    Console.WriteLine("");
                     /*
                      *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
                      * the convoy to go for a bit before taking data so i put it to 200 loops around the track.
@@ -61,8 +61,7 @@ namespace SOCD_RealLifeApplication
                             {
                                 foreach (var element in vehicle.vehicleCalculationData)
                                 {
-                                    Console.Write(element.actualWorkDone + "+" + element.expectedWork);
-                                    Console.WriteLine("");
+                                    Console.WriteLine(vehicle.Id + "-" + element.convoyNumber + ": " + element.actualWorkDone + "+" + element.expectedWork);
                                 }
                                 Console.WriteLine("");
                             }
@@ -90,12 +89,12 @@ namespace SOCD_RealLifeApplication
                             {
                                 Calculations.updateExpectedandActual();
                                 Program.convoy.Add(Program.circleTrack[0][vehicleNumber]);
-                                for(int index = 0; index < totalAdded; index++)
+                                SelectLeader.resetLeader();
+                                for (int index = 0; index < totalAdded; index++)
                                 {
                                     ConvoyMovement.moveSingleConvoy(Program.circleTrack[0][vehicleNumber]);
                                 }
                                 Program.circleTrack[0].RemoveAt(vehicleNumber);
-                                SelectLeader.resetLeader();
                                 totalAdded++;
                             }
                         }
@@ -120,25 +119,39 @@ namespace SOCD_RealLifeApplication
                 {
                     //We set the current entry point as the index ahead because that is what we are looking at.
                     currentEntryPoint = i + 1;
-                    if (Program.circleTrack[i + 1].Count != 0)
+                    /*foreach(Vehicle vehicle in Program.convoy)
                     {
-                        var totalAdded = 0;
-                        /*
-                         *Loops through the vehicles of the currentEntryPoint, i + 1. It decides wether or not to add based on a 1/10
-                         * probability.
-                         */
-                        for (int vehicleNumber = 0; vehicleNumber < Program.circleTrack[i + 1].Count; vehicleNumber++)
+                        if (vehicle.leader == true)
+                        {
+                            Console.WriteLine(vehicle.Id + ": " + "leader");
+                        }
+                        else
+                        {
+                            Console.WriteLine(vehicle.Id + ": " + "notleader");
+                        }
+                    }
+                    Thread.Sleep(10);
+                    Console.WriteLine("");*/
+
+                if (Program.circleTrack[i + 1].Count != 0)
+                {
+                    var totalAdded = 0;
+                    /*\
+                     *Loops through the vehicles of the currentEntryPoint, i + 1. It decides wether or not to add based on a 1/10
+                     * probability.
+                     */
+                    for (int vehicleNumber = 0; vehicleNumber < Program.circleTrack[i + 1].Count; vehicleNumber++)
                         {
                             if (NormalDistribution.probability() == 1)
                             {
                                 Calculations.updateExpectedandActual();
                                 Program.convoy.Add(Program.circleTrack[i + 1][vehicleNumber]);
+                                SelectLeader.resetLeader();
                                 for (int index = 0; index < totalAdded; index++)
                                 {
                                     ConvoyMovement.moveSingleConvoy(Program.circleTrack[i + 1][vehicleNumber]);
                                 }
                                 Program.circleTrack[i + 1].RemoveAt(vehicleNumber);
-                                SelectLeader.resetLeader();
                                 totalAdded++;
                             }
                         }

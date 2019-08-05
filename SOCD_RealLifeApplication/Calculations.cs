@@ -40,7 +40,8 @@ namespace SOCD_RealLifeApplication
         {
             var totalExpected = 0.0;
             var totalActual = 0.0;
-            foreach (VehicleExpectedAndActualData dataValue in leavingVehicle.vehicleCalculationData) {
+            leavingVehicle.vehicleCalculatedRatios.Add(new VehicleCalculatedRatios());
+            foreach(VehicleExpectedAndActualData dataValue in leavingVehicle.vehicleCalculationData) {
                 if(leavingVehicle.numberOfConvoysParticipated == dataValue.convoyNumber)
                 {
                     totalExpected += dataValue.expectedWork;
@@ -49,16 +50,20 @@ namespace SOCD_RealLifeApplication
             }
             leavingVehicle.vehicleCalculatedRatios[leavingVehicle.numberOfConvoysParticipated].calculatedRatio =
             (totalActual / totalExpected);
-            leavingVehicle.vehicleCalculatedRatios.Add(new VehicleCalculatedRatios());
+            
         }
         /*
          *This creates a text array that consists of a list of averaged ratios for each vehicle during each
          *respective convoy.
          */
          public static void updateExpectedandActual()
-        {
+        {                
             if (Program.convoy.Count > 1)
             {
+                foreach (Vehicle vehicles in Program.convoy)
+                {
+                    vehicles.vehicleCalculationData.Add(new VehicleExpectedAndActualData());
+                }
                 updateProportionalExepectedDistance();
                 setActualTime();
                 //Add new slot in our list because current convoy for vehicle is finished
@@ -66,7 +71,6 @@ namespace SOCD_RealLifeApplication
                 foreach (Vehicle vehicles in Program.convoy)
                 {
                     vehicles.vehicleCalculationData[vehicles.vehicleCalculationData.Count - 1].convoyNumber = vehicles.numberOfConvoysParticipated;
-                    vehicles.vehicleCalculationData.Add(new VehicleExpectedAndActualData());
                 }
             }
         }
@@ -85,12 +89,6 @@ namespace SOCD_RealLifeApplication
             }
 
             return returnedArrayOfAveragedRatios;
-        }
-
-        public static void displayData(double ratio)
-        {
-            //Console.WriteLine("{0:0.00000000}", ratio);
-            //Console.WriteLine(Program.convoy.Count);
         }
     }
 }

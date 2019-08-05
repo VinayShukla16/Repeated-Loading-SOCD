@@ -29,7 +29,7 @@ namespace SOCD_RealLifeApplication
                 }
             }
         }
-        /*
+        /* 
          *This increments the position of each vehicle in the convoy. One case is when the convoy is at 14999, which then makes the vehicle
          * reset its position to 0.
          */
@@ -46,7 +46,7 @@ namespace SOCD_RealLifeApplication
          * if applicable.
          */
         public static void moveSingleConvoy(Vehicle vehicle)
-        {
+        {  
             if (vehicle.position == (Program.numAvailablePosition - 1))
             {
                 vehicle.position = 0;

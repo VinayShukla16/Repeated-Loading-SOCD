@@ -27,17 +27,19 @@ namespace SOCD_RealLifeApplication
         { 
             if (vehicle.tripDuration == 0)
             {
-                placeVehicleBackInCircleTrack(vehicle);
                 //Catch up
                 int index = Program.convoy.IndexOf(vehicle);
                 vehicle.leader = false;
-                Program.convoy.Remove(vehicle);
-                SelectLeader.resetLeader();
-                ConvoyMovement.moveConvoyPositionAfterConvoyRemoved(index);
                 Calculations.updateExpectedandActual();
                 Calculations.calculateRatio(vehicle);
-                vehicle.numberOfConvoysParticipated++;
+                Program.convoy.Remove(vehicle);
 
+                placeVehicleBackInCircleTrack(vehicle);
+
+                SelectLeader.resetLeader();
+                ConvoyMovement.moveConvoyPositionAfterConvoyRemoved(index);
+
+                vehicle.numberOfConvoysParticipated++;
             } 
             
         }
