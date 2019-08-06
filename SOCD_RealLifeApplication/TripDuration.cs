@@ -33,10 +33,9 @@ namespace SOCD_RealLifeApplication
                 Calculations.updateExpectedandActual();
                 Calculations.calculateRatio(vehicle);
                 Program.convoy.Remove(vehicle);
-
+                SelectLeader.resetLeader();
                 placeVehicleBackInCircleTrack(vehicle);
 
-                SelectLeader.resetLeader();
                 ConvoyMovement.moveConvoyPositionAfterConvoyRemoved(index);
 
                 vehicle.numberOfConvoysParticipated++;

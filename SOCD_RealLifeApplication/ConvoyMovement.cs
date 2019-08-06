@@ -11,24 +11,6 @@ namespace SOCD_RealLifeApplication
     {
         //minutes or miles
         static double travelForOneSpace = 0.00284;
-        /*
-         *This method updates the leader time for the leader and increases the total distance traveled, which is equal to the
-         *time it takes(in minutes) because we are going 1 mile per minute
-         */
-        public static void updateTime()
-        {
-            if (Program.convoy.Count > 1)
-            {
-                foreach (Vehicle vehicle in Program.convoy)
-                {
-                    if (vehicle.leader == true)
-                    {
-                        vehicle.leaderTime += travelForOneSpace;
-                    }
-                    vehicle.totalDistanceTraveled += travelForOneSpace;
-                }
-            }
-        }
         /* 
          *This increments the position of each vehicle in the convoy. One case is when the convoy is at 14999, which then makes the vehicle
          * reset its position to 0.

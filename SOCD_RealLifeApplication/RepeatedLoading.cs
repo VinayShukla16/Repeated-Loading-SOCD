@@ -35,7 +35,6 @@ namespace SOCD_RealLifeApplication
                 if ((i == Program.numAvailablePosition - 1))
                 {
                     currentEntryPoint = 0;
-
                     /*foreach(Vehicle vehicle in Program.convoy)
                     {
                         if (vehicle.leader == true)
@@ -47,8 +46,27 @@ namespace SOCD_RealLifeApplication
                             Console.WriteLine(vehicle.Id + ": " + "notleader");
                         }
                     }
+                    
                     Thread.Sleep(500);
-                    Console.WriteLine("");
+                    Console.WriteLine("");*/
+                    /*foreach(Vehicle  vehicle in Program.convoy)
+                    {
+                        foreach(VehicleCalculatedRatios ratio in vehicle.vehicleCalculatedRatios)
+                        {
+                            if (Double.IsNaN(ratio.calculatedRatio))
+                            {
+                                foreach(VehicleExpectedAndActualData data in vehicle.vehicleCalculationData)
+                                {
+                                    if(data.convoyNumber == vehicle.numberOfConvoysParticipated)
+                                    {
+                                        Console.WriteLine(data.actualWorkDone);
+                                        Console.WriteLine(data.expectedWork);
+                                    }
+                                }
+                            }
+                        }
+                    }*/
+
                     /*
                      *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
                      * the convoy to go for a bit before taking data so i put it to 200 loops around the track.
@@ -180,7 +198,6 @@ namespace SOCD_RealLifeApplication
                 else
                 {
                     ConvoyMovement.moveConvoyPosition();
-                    ConvoyMovement.updateTime();
                 }
             }
         }
@@ -192,7 +209,6 @@ namespace SOCD_RealLifeApplication
         public static void moveAndUpdateVehiclePosition(int currentEntryPoint)
         {
             ConvoyMovement.moveConvoyPosition();
-            ConvoyMovement.updateTime();
             if ((Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint)) >= 0)
             {
                 TripDuration.updateTripDuration(Program.convoy[(Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint))]);

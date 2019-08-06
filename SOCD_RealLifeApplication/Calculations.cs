@@ -50,6 +50,8 @@ namespace SOCD_RealLifeApplication
             }
             leavingVehicle.vehicleCalculatedRatios[leavingVehicle.numberOfConvoysParticipated].calculatedRatio =
             (totalActual / totalExpected);
+            leavingVehicle.vehicleCalculatedRatios[leavingVehicle.numberOfConvoysParticipated].ratioConvoyNumber =
+            leavingVehicle.numberOfConvoysParticipated;
             
         }
         /*
