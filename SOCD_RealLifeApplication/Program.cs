@@ -11,7 +11,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Collections;
 using SOCD_RealLifeApplication;
 
@@ -45,8 +44,7 @@ namespace SOCD_Algorith_System
         //start the game
         private static void startGame()
         {
-            var startingPosition = SelectLeader.selectFirstLeader();
-            RepeatedLoading.startRepeatedLoading(startingPosition);
+            RepeatedLoading.startRepeatedLoading(SelectLeader.selectFirstLeader());
         }
     }
 }

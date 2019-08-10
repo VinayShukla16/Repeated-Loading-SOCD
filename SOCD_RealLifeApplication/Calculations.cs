@@ -15,11 +15,11 @@ namespace SOCD_RealLifeApplication
          */
         public static void updateProportionalExepectedDistance()
         {
-                foreach (Vehicle vehicle in Program.convoy)
-                {
-                    vehicle.vehicleCalculationData[vehicle.vehicleCalculationData.Count - 1].expectedWork += (vehicle.totalDistanceTraveled / (Program.convoy.Count));
-                    vehicle.totalDistanceTraveled = 0;
-                }
+            foreach (Vehicle vehicle in Program.convoy)
+            {
+                vehicle.vehicleCalculationData[vehicle.vehicleCalculationData.Count - 1].expectedWork = (vehicle.totalDistanceTraveled / (Program.convoy.Count));
+                vehicle.totalDistanceTraveled = 0;
+            }
         }
         /*
          *This takes the actual leader time for when a respective vehicle leaves the convoy. Then the ratio is calculated and stored into
@@ -54,11 +54,8 @@ namespace SOCD_RealLifeApplication
             leavingVehicle.numberOfConvoysParticipated;
             
         }
-        /*
-         *This creates a text array that consists of a list of averaged ratios for each vehicle during each
-         *respective convoy.
-         */
-         public static void updateExpectedandActual()
+
+        public static void updateExpectedandActual()
         {                
             if (Program.convoy.Count > 1)
             {
@@ -66,9 +63,9 @@ namespace SOCD_RealLifeApplication
                 {
                     vehicles.vehicleCalculationData.Add(new VehicleExpectedAndActualData());
                 }
+
                 updateProportionalExepectedDistance();
                 setActualTime();
-                //Add new slot in our list because current convoy for vehicle is finished
                 
                 foreach (Vehicle vehicles in Program.convoy)
                 {
@@ -76,6 +73,26 @@ namespace SOCD_RealLifeApplication
                 }
             }
         }
+
+        public static void findGreatestAndLeast(List<VehicleRatioAndVehicleID> arrayOfRatiosAndVehicles)
+        {
+            var greatest = arrayOfRatiosAndVehicles[0].ratio;
+            var least = arrayOfRatiosAndVehicles[0].ratio;
+
+            foreach (var ratioAndVehicleObj in arrayOfRatiosAndVehicles)
+            {
+                if (ratioAndVehicleObj.ratio > greatest)
+                {
+                    greatest = ratioAndVehicleObj.ratio;
+                }
+
+                if (ratioAndVehicleObj.ratio < least)
+                {
+                    least = ratioAndVehicleObj.ratio;
+                }
+            }
+        }
+
         public static double[] createTextArrayForTextFile(List<VehicleCalculatedRatios> ratioList)
         {
             double[] returnedArrayOfAveragedRatios = new double[ratioList.Count];

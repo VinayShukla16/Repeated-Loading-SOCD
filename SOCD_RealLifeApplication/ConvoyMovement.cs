@@ -37,6 +37,7 @@ namespace SOCD_RealLifeApplication
             {
                 vehicle.position++;
             }
+
             if (Program.convoy.Count > 1)
             {
                 if (vehicle.leader == true)
@@ -51,11 +52,16 @@ namespace SOCD_RealLifeApplication
          *After a vehicle is removed, a little bit of catch up is necessary to maintain the convoy. The vehicles behind the vehicle that was removed all increment one position.
          * Leader time and total distance traveled also incremented.
          */
-        public static void moveConvoyPositionAfterConvoyRemoved(int indexRemoved)
+        public static void moveConvoyPositionAfterConvoyRemoved(int indexRemoved, int currentEntryPoint)
         { 
             for (int i = indexRemoved - 1; i >= 0; i--)
             {
                 moveSingleConvoy(Program.convoy[i]);
+            }
+            if ((Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint)) >= 0)
+            {
+                TripDuration.updateTripDuration(Program.convoy[(Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint))]);
+                TripDuration.checkTripDuration(Program.convoy[(Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint))], currentEntryPoint);
             }
         }
     }

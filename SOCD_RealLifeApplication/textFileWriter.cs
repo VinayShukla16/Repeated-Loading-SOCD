@@ -21,7 +21,7 @@ namespace SOCD_RealLifeApplication
                 var arrayOfVehicleRatioMeans = Calculations.createTextArrayForTextFile(Program.vehicleList[i].vehicleCalculatedRatios);
                 foreach (var ratio in arrayOfVehicleRatioMeans) {
                     arrayData[i + 1] += ", " + ratio;
-                }
+                } 
             }
 
             return arrayData;

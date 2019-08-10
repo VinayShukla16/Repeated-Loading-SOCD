@@ -22,7 +22,7 @@ namespace SOCD_RealLifeApplication
                 randomNumber = (rand.Next(1000) * 150);
                 if (Program.circleTrack[randomNumber].Count != 0)
                 {
-                    var randomConvoy = rand.Next(0, Program.circleTrack[randomNumber].Count);
+                    var randomConvoy = rand.Next(Program.circleTrack[randomNumber].Count);
                     Program.convoy.Add(Program.circleTrack[randomNumber][randomConvoy]);
                     Program.convoy[0].leader = true;
                     Program.circleTrack[randomNumber].RemoveAt(randomConvoy);

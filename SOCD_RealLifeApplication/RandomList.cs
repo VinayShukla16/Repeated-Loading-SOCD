@@ -22,7 +22,7 @@ namespace SOCD_RealLifeApplication
                 {
                     Id = i,
                     position = (randomPosition),
-                    tripDuration = rand.Next(1, 1000),
+                    tripDuration = rand.Next(500, 1500),
                     leader = false,
                     leaderTime = 0,
                     numberOfConvoysParticipated = 0,

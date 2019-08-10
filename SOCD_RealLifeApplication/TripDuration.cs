@@ -23,20 +23,22 @@ namespace SOCD_RealLifeApplication
          *its time. Following suchm a series of commands are utilized to place the vehicle back in the circle track and update its
          *internal data values.
          */
-        public static void checkTripDuration(Vehicle vehicle)
+        public static void checkTripDuration(Vehicle vehicle, int currentEntryPoint)
         { 
             if (vehicle.tripDuration == 0)
             {
                 //Catch up
                 int index = Program.convoy.IndexOf(vehicle);
                 vehicle.leader = false;
+
                 Calculations.updateExpectedandActual();
                 Calculations.calculateRatio(vehicle);
-                Program.convoy.Remove(vehicle);
-                SelectLeader.resetLeader();
-                placeVehicleBackInCircleTrack(vehicle);
 
-                ConvoyMovement.moveConvoyPositionAfterConvoyRemoved(index);
+                Program.convoy.Remove(vehicle);
+                placeVehicleBackInCircleTrack(vehicle, currentEntryPoint);
+                SelectLeader.resetLeader();
+                
+                ConvoyMovement.moveConvoyPositionAfterConvoyRemoved(index, currentEntryPoint);
 
                 vehicle.numberOfConvoysParticipated++;
             } 
@@ -45,11 +47,11 @@ namespace SOCD_RealLifeApplication
         /*
          *This is just a simple method used to place a vehicle back into the circle track and randomize its trip duration.
          */
-        public static void placeVehicleBackInCircleTrack(Vehicle vehicle)
+        public static void placeVehicleBackInCircleTrack(Vehicle vehicle, int currentEntryPoint)
         {
             Random rand = new Random();
-            vehicle.tripDuration = rand.Next(1, 1000);
-            Program.circleTrack[vehicle.position].Add(vehicle);
+            vehicle.tripDuration = rand.Next(500, 1500);
+            Program.circleTrack[currentEntryPoint].Add(vehicle);
         }
     }
 }

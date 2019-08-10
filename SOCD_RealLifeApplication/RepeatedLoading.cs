@@ -27,7 +27,7 @@ namespace SOCD_RealLifeApplication
                  *First case is if we are at index 149999, at that point, we set i to 0 and then we name our currentEntryPoint as 0 because
                  * that is our currentEntryPoint.
                  */
-                 if(i == Program.numAvailablePosition)
+                if(i == Program.numAvailablePosition)
                 {
                     i = 0;
                 }
@@ -35,55 +35,32 @@ namespace SOCD_RealLifeApplication
                 if ((i == Program.numAvailablePosition - 1))
                 {
                     currentEntryPoint = 0;
-                    /*foreach(Vehicle vehicle in Program.convoy)
-                    {
-                        if (vehicle.leader == true)
-                        {
-                            Console.WriteLine(vehicle.Id + ": " + "leader");
-                        }
-                        else
-                        {
-                            Console.WriteLine(vehicle.Id + ": " + "notleader");
-                        }
-                    }
-                    
-                    Thread.Sleep(500);
-                    Console.WriteLine("");*/
-                    /*foreach(Vehicle  vehicle in Program.convoy)
-                    {
-                        foreach(VehicleCalculatedRatios ratio in vehicle.vehicleCalculatedRatios)
-                        {
-                            if (Double.IsNaN(ratio.calculatedRatio))
-                            {
-                                foreach(VehicleExpectedAndActualData data in vehicle.vehicleCalculationData)
-                                {
-                                    if(data.convoyNumber == vehicle.numberOfConvoysParticipated)
-                                    {
-                                        Console.WriteLine(data.actualWorkDone);
-                                        Console.WriteLine(data.expectedWork);
-                                    }
-                                }
-                            }
-                        }
-                    }*/
 
                     /*
                      *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
-                     * the convoy to go for a bit before taking data so i put it to 200 loops around the track.
+                     * the convoy to go for a bit before taking data so i put it to 5000 loops around the track.
+                     */          
+                    /*
+                     *We complie the data when we loop around 5000 times.
                      */
-                    if(counter == 2000)
+                    if(counter == 5000)
                     {
-                        foreach(Vehicle vehicle in Program.vehicleList)
+                        List<VehicleRatioAndVehicleID> arrayOfRatios = new List<VehicleRatioAndVehicleID>();
+                        foreach (Vehicle vehicle in Program.vehicleList)
                         {
-                            if (!Program.convoy.Contains(vehicle))
+                            var total = 0.0;
+                            foreach (VehicleCalculatedRatios ratio in vehicle.vehicleCalculatedRatios)
                             {
-                                foreach (var element in vehicle.vehicleCalculationData)
-                                {
-                                    Console.WriteLine(vehicle.Id + "-" + element.convoyNumber + ": " + element.actualWorkDone + "+" + element.expectedWork);
-                                }
-                                Console.WriteLine("");
+                                total += ratio.calculatedRatio;
                             }
+                            arrayOfRatios.Add(new VehicleRatioAndVehicleID
+                            {
+                                ratio = (total / (vehicle.numberOfConvoysParticipated + 1)),
+                                vehicleID = vehicle.Id
+                            });
                         }
+
+                        Calculations.findGreatestAndLeast(arrayOfRatios);
                         var array = textFileWriter.compileData();
                         textFileWriter.textWriter(array);
                     }
@@ -110,7 +87,7 @@ namespace SOCD_RealLifeApplication
                                 SelectLeader.resetLeader();
                                 for (int index = 0; index < totalAdded; index++)
                                 {
-                                    ConvoyMovement.moveSingleConvoy(Program.circleTrack[0][vehicleNumber]);
+                                    ConvoyMovement.moveSingleConvoy(Program.convoy[Program.convoy.Count - 1]);
                                 }
                                 Program.circleTrack[0].RemoveAt(vehicleNumber);
                                 totalAdded++;
@@ -137,39 +114,62 @@ namespace SOCD_RealLifeApplication
                 {
                     //We set the current entry point as the index ahead because that is what we are looking at.
                     currentEntryPoint = i + 1;
-                    /*foreach(Vehicle vehicle in Program.convoy)
-                    {
-                        if (vehicle.leader == true)
-                        {
-                            Console.WriteLine(vehicle.Id + ": " + "leader");
-                        }
-                        else
-                        {
-                            Console.WriteLine(vehicle.Id + ": " + "notleader");
-                        }
-                    }
-                    Thread.Sleep(10);
-                    Console.WriteLine("");*/
 
-                if (Program.circleTrack[i + 1].Count != 0)
-                {
-                    var totalAdded = 0;
-                    /*\
-                     *Loops through the vehicles of the currentEntryPoint, i + 1. It decides wether or not to add based on a 1/10
-                     * probability.
-                     */
-                    for (int vehicleNumber = 0; vehicleNumber < Program.circleTrack[i + 1].Count; vehicleNumber++)
+                    if ((i == Program.numAvailablePosition - 1))
+                    {
+                        currentEntryPoint = 0;
+
+                        /*
+                         *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
+                         * the convoy to go for a bit before taking data so i put it to 5000 loops around the track.
+                         */
+                        /*
+                         *We complie the data when we loop around 5000 times.
+                         */
+                        if (counter == 5000)
+                        {
+                            List<VehicleRatioAndVehicleID> arrayOfRatios = new List<VehicleRatioAndVehicleID>();
+                            foreach (Vehicle vehicle in Program.vehicleList)
+                            {
+                                var total = 0.0;
+                                foreach (VehicleCalculatedRatios ratio in vehicle.vehicleCalculatedRatios)
+                                {
+                                    total += ratio.calculatedRatio;
+                                }
+                                arrayOfRatios.Add(new VehicleRatioAndVehicleID
+                                {
+                                    ratio = (total / (vehicle.numberOfConvoysParticipated + 1)),
+                                    vehicleID = vehicle.Id
+                                });
+                            }
+
+                            Calculations.findGreatestAndLeast(arrayOfRatios);
+                            var array = textFileWriter.compileData();
+                            textFileWriter.textWriter(array);
+                        }
+                        counter++;
+                        Console.WriteLine(counter);
+                    }
+
+                        if (Program.circleTrack[currentEntryPoint].Count != 0)
+                    {
+                        var totalAdded = 0;
+                        /*
+                         *Loops through the vehicles of the currentEntryPoint, i + 1. It decides wether or not to add based on a 1/10
+                         *probability.
+                         */
+                        for (int vehicleNumber = 0; vehicleNumber < Program.circleTrack[currentEntryPoint].Count; vehicleNumber++)
                         {
                             if (NormalDistribution.probability() == 1)
                             {
                                 Calculations.updateExpectedandActual();
-                                Program.convoy.Add(Program.circleTrack[i + 1][vehicleNumber]);
+                                Program.convoy.Add(Program.circleTrack[currentEntryPoint][vehicleNumber]);
                                 SelectLeader.resetLeader();
                                 for (int index = 0; index < totalAdded; index++)
                                 {
-                                    ConvoyMovement.moveSingleConvoy(Program.circleTrack[i + 1][vehicleNumber]);
+                                    ConvoyMovement.moveSingleConvoy(Program.convoy[Program.convoy.Count - 1]);
                                 }
-                                Program.circleTrack[i + 1].RemoveAt(vehicleNumber);
+                                Program.circleTrack[currentEntryPoint].RemoveAt(vehicleNumber);
                                 totalAdded++;
                             }
                         }
@@ -180,7 +180,7 @@ namespace SOCD_RealLifeApplication
                     }
                     else
                     {
-                        moveAndUpdateVehiclePosition(currentEntryPoint);
+                         moveAndUpdateVehiclePosition(currentEntryPoint);
                     }
                 }
                 /*
@@ -192,8 +192,7 @@ namespace SOCD_RealLifeApplication
                     moveAndUpdateVehiclePosition(currentEntryPoint);
                 }
                 /*
-                 *This is just when
-                 * the convoy is in between entry points and just moving and updating leader time and convoy positions.
+                 *This is just when the convoy is in between entry points and just moving and updating leader time and convoy positions.
                  */
                 else
                 {
@@ -206,13 +205,13 @@ namespace SOCD_RealLifeApplication
          *This function moves the convoy position and tests if there is any vehicle at the entry point after moving. If there is, then we update and
          * check tripduration for the vehicle at the entry point.
          */
-        public static void moveAndUpdateVehiclePosition(int currentEntryPoint)
+        private static void moveAndUpdateVehiclePosition(int currentEntryPoint)
         {
             ConvoyMovement.moveConvoyPosition();
             if ((Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint)) >= 0)
             {
                 TripDuration.updateTripDuration(Program.convoy[(Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint))]);
-                TripDuration.checkTripDuration(Program.convoy[(Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint))]);
+                TripDuration.checkTripDuration(Program.convoy[(Program.convoy.FindIndex(vehicle => vehicle.position == currentEntryPoint))], currentEntryPoint);
             }
         }
 
