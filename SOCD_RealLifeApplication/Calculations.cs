@@ -33,15 +33,19 @@ namespace SOCD_RealLifeApplication
                 vehicle.leaderTime = 0;
             }
         }
-        /*
-         *This takes the expected and actual work done and builds a ratio of acutal over expected.
-         */
+       /*
+        *This takes the expected and actual work done and builds a ratio of acutal over expected.
+        */
        public static void calculateRatio(Vehicle leavingVehicle)
         {
             var totalExpected = 0.0;
             var totalActual = 0.0;
             leavingVehicle.vehicleCalculatedRatios.Add(new VehicleCalculatedRatios());
             foreach(VehicleExpectedAndActualData dataValue in leavingVehicle.vehicleCalculationData) {
+                /*
+                 *The convoy number has to be the same as the current number of convoys participated in order to
+                 *build a ratio for a specific convoy.
+                 */
                 if(leavingVehicle.numberOfConvoysParticipated == dataValue.convoyNumber)
                 {
                     totalExpected += dataValue.expectedWork;
@@ -54,7 +58,10 @@ namespace SOCD_RealLifeApplication
             leavingVehicle.numberOfConvoysParticipated;
             
         }
-
+        /*
+         *This is the function that is in charge of updating both the actual and expected values for each data point when
+         *the convoy is changed in any way, specifically count.
+         */
         public static void updateExpectedandActual()
         {                
             if (Program.convoy.Count > 1)
@@ -73,26 +80,35 @@ namespace SOCD_RealLifeApplication
                 }
             }
         }
-
+        /*
+         *Finds the vehicle with the greatest and least final ratio and displays it.
+         */
         public static void findGreatestAndLeast(List<VehicleRatioAndVehicleID> arrayOfRatiosAndVehicles)
         {
-            var greatest = arrayOfRatiosAndVehicles[0].ratio;
-            var least = arrayOfRatiosAndVehicles[0].ratio;
+            var greatest = arrayOfRatiosAndVehicles[0];
+            var least = arrayOfRatiosAndVehicles[0];
 
             foreach (var ratioAndVehicleObj in arrayOfRatiosAndVehicles)
             {
-                if (ratioAndVehicleObj.ratio > greatest)
+                if (ratioAndVehicleObj.ratio > greatest.ratio)
                 {
-                    greatest = ratioAndVehicleObj.ratio;
+                    greatest = ratioAndVehicleObj;
                 }
 
-                if (ratioAndVehicleObj.ratio < least)
+                if (ratioAndVehicleObj.ratio < least.ratio)
                 {
-                    least = ratioAndVehicleObj.ratio;
+                    least = ratioAndVehicleObj;
                 }
             }
+
+            Console.WriteLine("Greatest: " + greatest.vehicleID + "-ID: " + greatest.ratio);
+            Console.WriteLine("Least: " + least.vehicleID + "-ID: " + least.ratio);
         }
 
+        /*
+         *This function creates an array that contains the averaged ratios for a specific vehicle's ratio
+         *list.
+         */
         public static double[] createTextArrayForTextFile(List<VehicleCalculatedRatios> ratioList)
         {
             double[] returnedArrayOfAveragedRatios = new double[ratioList.Count];

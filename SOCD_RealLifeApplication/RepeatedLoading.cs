@@ -31,86 +31,12 @@ namespace SOCD_RealLifeApplication
                 {
                     i = 0;
                 }
-
-                if ((i == Program.numAvailablePosition - 1))
-                {
-                    currentEntryPoint = 0;
-
-                    /*
-                     *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
-                     * the convoy to go for a bit before taking data so i put it to 5000 loops around the track.
-                     */          
-                    /*
-                     *We complie the data when we loop around 5000 times.
-                     */
-                    if(counter == 5000)
-                    {
-                        List<VehicleRatioAndVehicleID> arrayOfRatios = new List<VehicleRatioAndVehicleID>();
-                        foreach (Vehicle vehicle in Program.vehicleList)
-                        {
-                            var total = 0.0;
-                            foreach (VehicleCalculatedRatios ratio in vehicle.vehicleCalculatedRatios)
-                            {
-                                total += ratio.calculatedRatio;
-                            }
-                            arrayOfRatios.Add(new VehicleRatioAndVehicleID
-                            {
-                                ratio = (total / (vehicle.numberOfConvoysParticipated + 1)),
-                                vehicleID = vehicle.Id
-                            });
-                        }
-
-                        Calculations.findGreatestAndLeast(arrayOfRatios);
-                        var array = textFileWriter.compileData();
-                        textFileWriter.textWriter(array);
-                    }
-                    counter++;
-                    Console.WriteLine(counter);
-                    /*
-                     *If there aren't any vehicles in the currentEntryPoint, 0, then we aren't going to bother with the whole adding process. However, if there are,
-                     * we want to loop through all of the vehicles at that entry point and generate a random number to determine if we are going to add each of the
-                     * vehicles at that entry point into our convoy. 
-                     */
-                    if (Program.circleTrack[0].Count != 0)
-                    {
-                        var totalAdded = 0;
-
-                        //MOVE TO SEPERATE FUNCTION
-                        //Loops through each vehicle in the entry point
-                        for (int vehicleNumber = 0; vehicleNumber < Program.circleTrack[0].Count; vehicleNumber++)
-                        {
-                            //1/10 chance for us to add the specified vehicle.
-                            if (NormalDistribution.probability() == 1)
-                            {
-                                Calculations.updateExpectedandActual();
-                                Program.convoy.Add(Program.circleTrack[0][vehicleNumber]);
-                                SelectLeader.resetLeader();
-                                for (int index = 0; index < totalAdded; index++)
-                                {
-                                    ConvoyMovement.moveSingleConvoy(Program.convoy[Program.convoy.Count - 1]);
-                                }
-                                Program.circleTrack[0].RemoveAt(vehicleNumber);
-                                totalAdded++;
-                            }
-                        }
-                        //When we don't add any vehicles
-                        if (totalAdded == 0)
-                        {
-                            moveAndUpdateVehiclePosition(currentEntryPoint);
-                        }
-                    }
-                    //If there aren't any vehicles at the entry point, 0
-                    else
-                    {
-                        moveAndUpdateVehiclePosition(currentEntryPoint);
-                    }
-                }
                 /*
-                 *We looka at the index head and if it is divisble by 150, then we know that it is an entry point. This is because entry points are spaced
+                 *We look at the index head and if it is divisble by 150, then we know that it is an entry point. This is because entry points are spaced
                  *out by 150 starting at 0. This is very similar to the last case and more or less, this is the if statement that will be executed rather than the
                  * other one because this encompasses all entry points besides 0.
                  */
-                else if (((i + 1) % 150) == 0)
+                if (((i + 1) % 150) == 0)
                 {
                     //We set the current entry point as the index ahead because that is what we are looking at.
                     currentEntryPoint = i + 1;
@@ -126,7 +52,7 @@ namespace SOCD_RealLifeApplication
                         /*
                          *We complie the data when we loop around 5000 times.
                          */
-                        if (counter == 5000)
+                        if (counter == 500)
                         {
                             List<VehicleRatioAndVehicleID> arrayOfRatios = new List<VehicleRatioAndVehicleID>();
                             foreach (Vehicle vehicle in Program.vehicleList)
@@ -142,10 +68,9 @@ namespace SOCD_RealLifeApplication
                                     vehicleID = vehicle.Id
                                 });
                             }
-
                             Calculations.findGreatestAndLeast(arrayOfRatios);
-                            var array = textFileWriter.compileData();
-                            textFileWriter.textWriter(array);
+                            TextFileWriter.textWriter(TextFileWriter.compileData());
+                            break;
                         }
                         counter++;
                         Console.WriteLine(counter);

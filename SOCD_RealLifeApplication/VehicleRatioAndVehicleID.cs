@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ *Used for finding the greatest and least value.
+ */
+using System;
 namespace SOCD_RealLifeApplication
 {
     public class VehicleRatioAndVehicleID

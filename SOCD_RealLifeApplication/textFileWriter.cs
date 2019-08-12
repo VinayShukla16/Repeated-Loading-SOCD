@@ -6,7 +6,7 @@ using SOCD_Algorith_System;
 
 namespace SOCD_RealLifeApplication
 {
-    public class textFileWriter
+    public class TextFileWriter
     {
         /*
          *Compiles the data for the specified vehicles and creates an array from it.
