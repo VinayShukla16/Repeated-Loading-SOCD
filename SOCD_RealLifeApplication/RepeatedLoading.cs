@@ -47,12 +47,9 @@ namespace SOCD_RealLifeApplication
 
                         /*
                          *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
-                         * the convoy to go for a bit before taking data so i put it to 5000 loops around the track.
+                         * the convoy to go for a bit before taking data so I put it to 10000 loops around the track.
                          */
-                        /*
-                         *We complie the data when we loop around 5000 times.
-                         */
-                        if (counter == 500)
+                        if (counter == 10000)
                         {
                             List<VehicleRatioAndVehicleID> arrayOfRatios = new List<VehicleRatioAndVehicleID>();
                             foreach (Vehicle vehicle in Program.vehicleList)
@@ -68,6 +65,13 @@ namespace SOCD_RealLifeApplication
                                     vehicleID = vehicle.Id
                                 });
                             }
+                            var averageNumConvoy = 0;
+                            foreach(Vehicle vehicle in Program.vehicleList)
+                            {
+                                averageNumConvoy += vehicle.numberOfConvoysParticipated;
+                            }
+                            averageNumConvoy = (averageNumConvoy / Program.vehicleList.Length);
+                            Console.WriteLine(averageNumConvoy);
                             Calculations.findGreatestAndLeast(arrayOfRatios);
                             TextFileWriter.textWriter(TextFileWriter.compileData());
                             break;
@@ -76,7 +80,7 @@ namespace SOCD_RealLifeApplication
                         Console.WriteLine(counter);
                     }
 
-                        if (Program.circleTrack[currentEntryPoint].Count != 0)
+                    if (Program.circleTrack[currentEntryPoint].Count != 0)
                     {
                         var totalAdded = 0;
                         /*

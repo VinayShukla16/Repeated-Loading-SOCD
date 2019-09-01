@@ -9,7 +9,7 @@ namespace SOCD_RealLifeApplication
         public static int probability()
         {
             var rand = new Random();
-            return rand.Next(0, 10);
+            return rand.Next(0, 15);
         }
     }
 }

@@ -50,7 +50,7 @@ namespace SOCD_RealLifeApplication
         public static void placeVehicleBackInCircleTrack(Vehicle vehicle, int currentEntryPoint)
         {
             Random rand = new Random();
-            vehicle.tripDuration = rand.Next(500, 1500);
+            vehicle.tripDuration = rand.Next(1000, 1500);
             Program.circleTrack[currentEntryPoint].Add(vehicle);
         }
     }
