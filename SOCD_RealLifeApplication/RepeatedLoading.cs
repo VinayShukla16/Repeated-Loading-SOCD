@@ -49,7 +49,7 @@ namespace SOCD_RealLifeApplication
                          *Don't mind this counter stuff too much, it is merely used to generate the txt file. It is hacked together and I wanted
                          * the convoy to go for a bit before taking data so I put it to 10000 loops around the track.
                          */
-                        if (counter == 10000)
+                        if (counter == 500)
                         {
                             List<VehicleRatioAndVehicleID> arrayOfRatios = new List<VehicleRatioAndVehicleID>();
                             foreach (Vehicle vehicle in Program.vehicleList)

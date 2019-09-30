@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{5B970E9B-C540-4D66-A903-2F654C1EBE39}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="RepeatedLoading.cs">
     <Files>
-      <File FileName="NormalDistribution.cs" Line="12" Column="35" />
+      <File FileName="NormalDistribution.cs" Line="1" Column="3" />
       <File FileName="Program.cs" />
       <File FileName="RandomList.cs" />
       <File FileName="VehicleCalculatedRatios.cs" />
-      <File FileName="RepeatedLoading.cs" Line="53" Column="70" />
+      <File FileName="RepeatedLoading.cs" Line="52" Column="41" />
       <File FileName="Calculations.cs" />
       <File FileName="ConvoyMovement.cs" />
       <File FileName="TripDuration.cs" />
